@@ -1,0 +1,19 @@
+1. i didn't write suitable case handeling when the intent goes unknown, 
+so for that i need to write a suitable response for unknown intent.
+2. "for word in list_text:
+if word in data["keywords"]" -> this was crashing because instead of first searching
+in keywords and then comparing with the user_ip i was searching in user_ip and searching in
+keywords.
+FIX: first search in keywords and then compare with user_ip.
+3. earlier in Intent dict for greeting key for keywords key the data was ["Hey","Hello"]
+but as the text is getting in lowercase this was crashing the logic.
+Fix: make all the words in keywords in lowercase because for preprocessing we are lowercasing 
+the characters.
+4. case handling for intent="unknown" is not compatible with logic because for responsefunct
+the expected op is Intent[intent]["response"] but current version -> "unknown": "Chatbot didn't understand the text."
+dont have any "response" value for intent="unknown"
+FIX: the response value for intent="unknown" must be added.
+RULE-> all intents must have the same schema.
+5. redundancy issue -> in main funct the intent is classified and for respond funct too the intentis
+calculated again twice.
+FIX: pass the intent value to respond.
